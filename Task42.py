@@ -1,23 +1,9 @@
-# Задача 42: Узнать какая максимальная households (index = 6)
-# в зоне минимального значения population (index = 5) .
+# Задача 42: Узнать какая максимальная households
+# в зоне минимального значения population
 
 import pandas as pd
 
 data = pd.read_csv('california_housing_train.csv', sep=',')
-
-# в слевой части условие прописываем (ищем строку с минимальным population)
-# а в правой название столбцов которые надо отображать в найденой строке
-print("Значение households при минимальноем population")
-print(data[data["population"] == data["population"].min()][["households", "population"]])
-print()
-
-print("Значение households в области минимальной population")
-print(data[(data["population"] <= (data["population"].min() + 10)) &
-           (data["population"] >= (data["population"].min() - 10))][["households", "population"]])
-print()
-
-# Поиск максимума среди всех минимумов
-dl = data[(data["population"] <= (data["population"].min() + 10)) &
-          (data["population"] >= (data["population"].min() - 10))][["households"]].max()
-dl1 = dl["households"]
-print(f"Максимальная households в области минимальной population: {dl1}")
+min_value_population = data["population"].min()
+max_value = data[data['population'] == min_value_population]['households'].max()
+print(f"Максимальная households в зоне минимального значения population: {max_value}")
